@@ -10,11 +10,8 @@ common_actions = {
 }
 
 user_paths = [
-    path("user/", UserViewSet.as_view(common_actions),
-         name="user-list"),
-    path("user/<int:pk>/",
-         UserViewSet.as_view({"get": "retrieve", "patch": "partial_update", "delete": "destroy"}),
-         name="user-detail"),
+    path("user/", UserViewSet.as_view(common_actions), name="user-list"),
+    path("user/<int:pk>/", UserViewSet.as_view({"get": "retrieve", "patch": "partial_update", "delete": "destroy", "put": "update"}), name="user-detail"),
 
     path('token/create', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

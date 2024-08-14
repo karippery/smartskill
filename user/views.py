@@ -14,50 +14,29 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    search_fields = ["email","first_name","last_name"]
+    search_fields = ["email", "first_name", "last_name"]
     pagination_class = DefaultPagination
 
     def create(self, request, *args, **kwargs):
-        # Extract the password from the request data
-        password = request.data.get('password', None)
-
-        # Use the serializer to validate the rest of the data
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        user = serializer.save()
 
         # Set and hash the password if it was provided
+        password = request.data.get('password', None)
         if password:
-            user = User(**serializer.validated_data)
             user.set_password(password)
-        else:
-            user = User(**serializer.validated_data)
-
-        # Save the user to the database
-        user.save()
-
-        # Return the serialized user data
+            user.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
-        # Get the user instance to be updated
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
-
-        # Extract the password from the request data
-        password = request.data.get('password', None)
-
-        # Use the serializer to validate the rest of the data
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
-
-        # Save the user instance without saving it to the database yet
-        user = serializer.save(commit=False)
-
-        # Set and hash the password if it was provided
+        user = serializer.save()
+        password = request.data.get('password', None)
         if password:
             user.set_password(password)
-
-        # Save the user to the database
-        user.save()
-
+            user.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
