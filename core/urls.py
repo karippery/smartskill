@@ -20,17 +20,23 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib import admin
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-
+from django.conf import settings
+from django.urls import include, path
 
 def redirect_to_swagger(request):
     return redirect('schema-swagger-ui')
 
-
 urlpatterns = [
-    path('', redirect_to_swagger),
     path('admin/', admin.site.urls),
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('', include('user.urls')),
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='schema-swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('user/', include('user.urls')),  # Change the root path to avoid conflict
+    path('', redirect_to_swagger),  # Ensure this is after all other paths to avoid conflicts
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]

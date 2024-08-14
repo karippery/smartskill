@@ -6,3 +6,5 @@ django-rest-swagger==2.1.2
 drf-spectacular
 psycopg2-binary>=2.9
 django-filter
+
+django-debug-toolbar
