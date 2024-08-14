@@ -10,7 +10,7 @@ media/
 .env
 
 # PostgreSQL data directory
-postgres_data/
+postgre/
 
 # Virtual environment
 .env/

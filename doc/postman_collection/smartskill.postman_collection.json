@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "2eca55bc-9480-4599-8b3f-0a85e98f6213",
+		"name": "smartskill",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3233866",
+		"_collection_link": "https://dark-sunset-772263.postman.co/workspace/My-Workspace~a1fb90d1-a56e-487d-801b-cbb4db52d3bd/collection/3233866-2eca55bc-9480-4599-8b3f-0a85e98f6213?action=share&source=collection_link&creator=3233866"
+	},
+	"item": [
+		{
+			"name": "jwt create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const {access, refresh} = JSON.parse(responseBody);\r",
+							"if (access) {\r",
+							"    pm.collectionVariables.set(\"TOKEN\", access); // This will set the collection variable TOKEN\r",
+							"    pm.collectionVariables.set(\"REFRESH_TOKEN\", refresh); // This will set the collection variable REFRESH_TOKEN\r",
+							"}\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - refresh and access\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.have.property('refresh');\r",
+							"    pm.expect(responseData).to.have.property('access');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Refresh and access are non-empty strings\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.refresh).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Refresh should not be empty\");\r",
+							"    pm.expect(responseData.access).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Access should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"admin@admin.com\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8090/token/create",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8090",
+					"path": [
+						"token",
+						"create"
+					]
+				},
+				"description": "### Create Token\n\nThis endpoint is used to create a new token for authentication.\n\n#### Request Body\n\n- `email` (string, required): The email of the user.\n    \n- `password` (string, required): The password of the user.\n    \n\n#### Response\n\nUpon successful execution, the server responds with a status code of 200 and a JSON object containing:\n\n- `refresh` (string): The refresh token for authentication.\n    \n- `access` (string): The access token for authentication."
+			},
+			"response": []
+		},
+		{
+			"name": "user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is within an acceptable range\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.results).to.be.an('array').that.is.not.empty;\r",
+							"\r",
+							"    const requiredFields = [\"id\", \"email\", \"first_name\", \"last_name\", \"is_verified\", \"is_staff\", \"is_superuser\", \"created_date\", \"updated_date\"];\r",
+							"\r",
+							"    responseData.results.forEach(function (result) {\r",
+							"        requiredFields.forEach(function (field) {\r",
+							"            pm.expect(result).to.have.property(field);\r",
+							"        });\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Id is a non-negative integer\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.results).to.be.an('array');\r",
+							"    responseData.results.forEach(function(user) {\r",
+							"        pm.expect(user.id).to.be.a('number');\r",
+							"        pm.expect(user.id).to.be.at.least(0, \"Id should be a non-negative integer\");\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Email is in a valid format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.results).to.be.an('array');\r",
+							"    responseData.results.forEach(function(user) {\r",
+							"        pm.expect(user.email).to.be.a('string');\r",
+							"        pm.expect(user.email).to.match(/\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b/, \"Email should be in a valid format\");\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8090/user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8090",
+					"path": [
+						"user",
+						""
+					]
+				},
+				"description": "The endpoint retrieves a list of users. The response is in JSON format and follows the schema below:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"links\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"next\": {\n                    \"type\": [\"string\", \"null\"]\n                },\n                \"previous\": {\n                    \"type\": [\"string\", \"null\"]\n                },\n                \"current\": {\n                    \"type\": \"integer\"\n                }\n            }\n        },\n        \"total_items\": {\n            \"type\": \"integer\"\n        },\n        \"total_pages\": {\n            \"type\": \"integer\"\n        },\n        \"results\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"id\": {\n                        \"type\": \"integer\"\n                    },\n                    \"last_login\": {\n                        \"type\": [\"string\", \"null\"]\n                    },\n                    \"email\": {\n                        \"type\": \"string\"\n                    },\n                    \"first_name\": {\n                        \"type\": \"string\"\n                    },\n                    \"last_name\": {\n                        \"type\": \"string\"\n                    },\n                    \"title\": {\n                        \"type\": [\"string\", \"null\"]\n                    },\n                    \"location\": {\n                        \"type\": [\"string\", \"null\"]\n                    },\n                    \"is_verified\": {\n                        \"type\": \"boolean\"\n                    },\n                    \"is_staff\": {\n                        \"type\": \"boolean\"\n                    },\n                    \"is_superuser\": {\n                        \"type\": \"boolean\"\n                    },\n                    \"created_date\": {\n                        \"type\": \"string\"\n                    },\n                    \"updated_date\": {\n                        \"type\": \"string\"\n                    }\n                }\n            }\n        }\n    }\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(201);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.have.property('last_login');\r",
+							"    pm.expect(responseData).to.have.property('email');\r",
+							"    pm.expect(responseData).to.have.property('first_name');\r",
+							"    pm.expect(responseData).to.have.property('last_name');\r",
+							"    pm.expect(responseData).to.have.property('title');\r",
+							"    pm.expect(responseData).to.have.property('location');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Email is in a valid format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.email).to.be.a('string').and.to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"password\": \"123456\",\r\n  \"email\": \"john@john.com\",\r\n  \"first_name\": \"john\",\r\n  \"last_name\": \"raphy\",\r\n  \"title\": \"{{$randomJobTitle}}\",\r\n  \"location\": \"{{$randomCity}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8090/user/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8090",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8090/user/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8090",
+					"path": [
+						"user",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "REFRESH_TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
