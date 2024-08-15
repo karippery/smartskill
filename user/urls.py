@@ -1,8 +1,5 @@
 from django.urls import path
-
-from user.serializers import CustomTokenObtainPairView
-
-from .views import UserViewSet
+from .views import CustomTokenObtainPairView, UserViewSet
 from rest_framework_simplejwt.views import TokenRefreshView
 common_actions = {
     "get": "list",

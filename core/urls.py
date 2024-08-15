@@ -31,7 +31,7 @@ urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='schema-swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    path('user/', include('user.urls')),  # Change the root path to avoid conflict
+    path('', include('user.urls')),  # Change the root path to avoid conflict
     path('', redirect_to_swagger),  # Ensure this is after all other paths to avoid conflicts
 ]
 

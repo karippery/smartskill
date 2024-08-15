@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from core.utils.paginations import DefaultPagination
-from user.serializers import UserSerializer
+from user.serializers import CustomTokenObtainPairSerializer, UserSerializer
 from .models import User
 from rest_framework import viewsets, status
 from rest_framework.response import Response
@@ -40,3 +40,7 @@ class UserViewSet(viewsets.ModelViewSet):
             user.set_password(password)
             user.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
