@@ -43,13 +43,18 @@ services:
   smarkskill:
     container_name: smartskill
     build: .
-    command: python manage.py runserver 0.0.0.0:8090
+    command: sh -c "python manage.py makemigrations &&
+           python manage.py migrate &&
+           python manage.py createsuperuser &&
+           python manage.py runserver 0.0.0.0:8090"
+
     volumes:
       - .:/app
     ports:
       - "8090:8090"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings
     restart: always
