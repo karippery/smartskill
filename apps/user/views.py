@@ -1,13 +1,40 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+from apps.user.models import User
+from apps.user.serializers import CustomTokenObtainPairSerializer, UserSerializer
 from core.utils.paginations import DefaultPagination
-from user.serializers import CustomTokenObtainPairSerializer, UserSerializer
-from .models import User
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework import generics
+
+class UserListCreateView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    search_fields = ["email", "first_name", "last_name"]
+    pagination_class = DefaultPagination
+
+    def create(self, serializer):
+        user = serializer.save()
+        password = self.request.data.get('password', None)
+        if password:
+            user.set_password(password)
+            user.save()
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_update(self, serializer):
+        user = serializer.save()
+        password = self.request.data.get('password', None)
+        if password:
+            user.set_password(password)
+            user.save()
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
