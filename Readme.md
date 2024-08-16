@@ -42,8 +42,8 @@ Use Docker Compose to run the application:
 2. The application will be available at `http://127.0.0.1:8090/`.
 
 
-```
 ### .env file
+
 ```
     APP_NAME="Smart Skill"
     APP_DESCRIPTION="This is a web application designed to streamline the process of employee skill management within a company."
@@ -54,7 +54,9 @@ Use Docker Compose to run the application:
     DATABASE_PORT=5432
 
 ```
+
 # PgAdmin Access and Usage
+
 
 ## Accessing PgAdmin
 
@@ -62,6 +64,7 @@ Once the PgAdmin container is running, you can access it through your web browse
 
 1. Open your web browser.
 2. Navigate to `http://localhost:8054`.
+
 
 ## Logging In
 
