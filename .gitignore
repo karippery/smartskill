@@ -58,7 +58,7 @@ static/
 media/
 
 # Django migrations
-*/migrations/
+*/apps/migrations/
 
 # IDE specific files
 .idea/

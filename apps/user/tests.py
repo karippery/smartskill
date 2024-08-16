@@ -3,7 +3,7 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 from rest_framework import status
 from django.urls import reverse
-from .models import User
+from apps.user.models import User
 
 class UserAPITests(TestCase):
     def setUp(self):
@@ -40,7 +40,7 @@ class UserAPITests(TestCase):
         self.assertEqual(response.data['email'], self.user.email)
 
     def test_post_user(self):
-        response = self.client.post(reverse('user-list'), {
+        response = self.client.post(reverse('user-list-create'), {
             'email': 'newuser@example.com',
             'password': 'newpassword',
             'first_name': 'New',

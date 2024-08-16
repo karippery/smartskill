@@ -18,8 +18,9 @@ Smart-Skill is a web application designed to streamline the process of employee 
 ## Getting Started
 
 ### Prerequisites
-- Python 3.x
+- Python 3.10.0
 - Django 4.2
+- docker (docker-desktop)
 
 ### Installation
 1. Clone the repository:
@@ -30,24 +31,17 @@ Smart-Skill is a web application designed to streamline the process of employee 
     ```bash
     cd smart-skill
     ```
-3. Install the required packages:
-    ```bash
-    pip install -r requirements.txt
-    ```
+
 
 ### Run the Application
 Use Docker Compose to run the application:
 1. Build and start the containers:
     ```bash
-    docker-compose up --build
+    docker-compose up --build -d
     ```
 2. The application will be available at `http://127.0.0.1:8090/`.
 
-### Migrate the Database
-Apply the migrations to create the database tables:
-```bash
-docker-compose run smartskill python manage.py makemigrations
-docker-compose run smartskill python manage.py migrate
+
 ```
 ### .env file
 ```
