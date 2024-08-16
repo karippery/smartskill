@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import CustomTokenObtainPairView, UserDetailView, UserListCreateView
 from rest_framework_simplejwt.views import TokenRefreshView
+
+from apps.user.views import CustomTokenObtainPairView, UserDetailView, UserListCreateView
 common_actions = {
     "get": "list",
     "post": "create",
