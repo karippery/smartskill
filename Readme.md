@@ -107,7 +107,7 @@ For additional help, consult the PgAdmin [documentation](https://www.pgadmin.org
 The Admin Panel provides a web-based interface for managing application data. To access it:
 
 1. Open your web browser.
-2. Navigate to `http://localhost:8000/admin/`.
+2. Navigate to `http://localhost:8090/admin/`.
 3. Log in using the admin credentials set up in your Django settings.
 
 ### Schema
@@ -115,14 +115,14 @@ The Admin Panel provides a web-based interface for managing application data. To
 The Schema endpoint provides the OpenAPI schema of your API in JSON format. This is useful for integrating with tools that require a formal API description. To access the schema:
 
 1. Open your web browser.
-2. Navigate to `http://localhost:8000/schema/`.
+2. Navigate to `http://localhost:8090/schema/`.
 
 ### Swagger UI
 
 Swagger UI provides an interactive API documentation interface. It allows you to explore and test API endpoints directly from the browser. To access Swagger UI:
 
 1. Open your web browser.
-2. Navigate to `http://localhost:8000/swagger/`.
+2. Navigate to `http://localhost:8090/swagger/`.
 
 In Swagger UI, you can view the available API endpoints, see their descriptions, and interact with them by sending requests and viewing responses.
 
@@ -131,4 +131,4 @@ In Swagger UI, you can view the available API endpoints, see their descriptions,
 ReDoc offers a different style of interactive API documentation. It is another way to visualize and interact with your API. To access ReDoc:
 
 1. Open your web browser.
-2. Navigate to `http://localhost:8000/api/schema/redoc/`.
+2. Navigate to `http://localhost:8090/api/schema/redoc/`.
