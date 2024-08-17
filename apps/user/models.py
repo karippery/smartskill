@@ -30,7 +30,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=254, unique=True)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
-    title = models.CharField(max_length=250, blank=True, null=True)
+    sex = models.CharField(max_length=20)
+    title = models.CharField(max_length=20, blank=True, null=True)
     location = models.CharField(max_length=250, blank=True, null=True)
 
     is_verified = models.BooleanField(default=False)
