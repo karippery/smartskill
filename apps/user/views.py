@@ -1,5 +1,4 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from apps.user.models import User
 from apps.user.serializers import CustomTokenObtainPairSerializer, UserSerializer
