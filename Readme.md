@@ -85,11 +85,11 @@ After logging in to PgAdmin, follow these steps to connect to a PostgreSQL datab
    - **General Tab**:
      - **Name**: Enter a name for the connection (e.g., `MyDatabase`).
    - **Connection Tab**:
-     - **Host name/address**: Enter the hostname or IP address of your PostgreSQL server.
+     - **Host name/address**: Enter the hostname `db`.
      - **Port**: Enter the port number (default is `5432`).
-     - **Maintenance database**: Enter the name of the database to connect to (usually `postgres`).
-     - **Username**: Enter the PostgreSQL username.
-     - **Password**: Enter the PostgreSQL password.
+     - **Maintenance database**: Enter the name of the database to connect to `postgres`.
+     - **Username**: Enter the PostgreSQL username `postgres`.
+     - **Password**: Enter the PostgreSQL password `postgres`.
 4. Click **Save**.
 
 Your PostgreSQL database should now be listed under **Servers** in the PgAdmin dashboard. Click on it to manage your database.

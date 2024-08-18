@@ -57,8 +57,10 @@ celerybeat-schedule.*
 static/
 media/
 
+
 # Django migrations
-*/apps/migrations/
+apps/skills/migrations/0*.py
+apps/user/migrations/0*.py
 
 # IDE specific files
 .idea/
