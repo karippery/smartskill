@@ -11,10 +11,13 @@ class SkillCategorySerializer(serializers.ModelSerializer):
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ['category_id', 'name']
+        fields = ['id','category_id', 'name']
 
 class UserSkillsSerializer(serializers.ModelSerializer):
+    category_id = serializers.CharField(source='skill_id.category_id.id', read_only=True)
+    category_name = serializers.CharField(source='skill_id.category_id.name', read_only=True)
+    skill_name = serializers.CharField(source='skill_id.name', read_only=True)
     class Meta:
         model = UserSkill
-        fields = ['user_id','skill_id','level']
+        fields = ['id',"category_id",'category_name','user_id','skill_id','skill_name','level']
 

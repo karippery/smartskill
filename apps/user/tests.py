@@ -30,6 +30,7 @@ class UserAPITests(TestCase):
             'first_name': 'Updated',
             'last_name': 'User',
             'title': 'Mr.',
+            'sex':'Male',
             'location': 'New Location',
             'is_verified': True
         }
@@ -45,6 +46,10 @@ class UserAPITests(TestCase):
             'password': 'newpassword',
             'first_name': 'New',
             'last_name': 'User',
+            'title': 'Mr.',
+            'sex':'Male',
+            'location': 'New Location',
+            'is_verified': True
         })
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['email'], 'newuser@example.com')
