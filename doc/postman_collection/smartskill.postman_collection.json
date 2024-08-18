@@ -8,6 +8,351 @@
 	},
 	"item": [
 		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is within an acceptable range\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(300);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.results).to.be.an('array').that.is.not.empty;\r",
+									"\r",
+									"    const requiredFields = [\"id\", \"email\", \"first_name\", \"last_name\", \"is_verified\", \"is_staff\", \"is_superuser\", \"created_date\", \"updated_date\"];\r",
+									"\r",
+									"    responseData.results.forEach(function (result) {\r",
+									"        requiredFields.forEach(function (field) {\r",
+									"            pm.expect(result).to.have.property(field);\r",
+									"        });\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Id is a non-negative integer\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.results).to.be.an('array');\r",
+									"    responseData.results.forEach(function(user) {\r",
+									"        pm.expect(user.id).to.be.a('number');\r",
+									"        pm.expect(user.id).to.be.at.least(0, \"Id should be a non-negative integer\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Email is in a valid format\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.results).to.be.an('array');\r",
+									"    responseData.results.forEach(function(user) {\r",
+									"        pm.expect(user.email).to.be.a('string');\r",
+									"        pm.expect(user.email).to.match(/\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b/, \"Email should be in a valid format\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8090/user/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user",
+								""
+							]
+						},
+						"description": "The endpoint retrieves a list of users. The response is in JSON format and follows the schema below:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"links\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"next\": {\n                    \"type\": [\"string\", \"null\"]\n                },\n                \"previous\": {\n                    \"type\": [\"string\", \"null\"]\n                },\n                \"current\": {\n                    \"type\": \"integer\"\n                }\n            }\n        },\n        \"total_items\": {\n            \"type\": \"integer\"\n        },\n        \"total_pages\": {\n            \"type\": \"integer\"\n        },\n        \"results\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"id\": {\n                        \"type\": \"integer\"\n                    },\n                    \"last_login\": {\n                        \"type\": [\"string\", \"null\"]\n                    },\n                    \"email\": {\n                        \"type\": \"string\"\n                    },\n                    \"first_name\": {\n                        \"type\": \"string\"\n                    },\n                    \"last_name\": {\n                        \"type\": \"string\"\n                    },\n                    \"title\": {\n                        \"type\": [\"string\", \"null\"]\n                    },\n                    \"location\": {\n                        \"type\": [\"string\", \"null\"]\n                    },\n                    \"is_verified\": {\n                        \"type\": \"boolean\"\n                    },\n                    \"is_staff\": {\n                        \"type\": \"boolean\"\n                    },\n                    \"is_superuser\": {\n                        \"type\": \"boolean\"\n                    },\n                    \"created_date\": {\n                        \"type\": \"string\"\n                    },\n                    \"updated_date\": {\n                        \"type\": \"string\"\n                    }\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.have.property('last_login');\r",
+									"    pm.expect(responseData).to.have.property('email');\r",
+									"    pm.expect(responseData).to.have.property('first_name');\r",
+									"    pm.expect(responseData).to.have.property('last_name');\r",
+									"    pm.expect(responseData).to.have.property('title');\r",
+									"    pm.expect(responseData).to.have.property('location');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Email is in a valid format\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.email).to.be.a('string').and.to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"654321\",\r\n  \"email\": \"john@john.com\",\r\n  \"first_name\": \"john\",\r\n  \"last_name\": \"john\",\r\n  \"sex\": \"male\",\r\n  \"title\": \"Mr\",\r\n  \"location\": \"Braunschweig\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8090/user/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8090/user/2/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "skills",
+			"item": [
+				{
+					"name": "skill",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8090/skills/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"skills",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const programmingLanguages = [\r",
+									"    \"JavaScript\",\r",
+									"    \"Python\",\r",
+									"    \"Java\",\r",
+									"    \"C++\",\r",
+									"    \"Ruby\",\r",
+									"    \"Go\",\r",
+									"    \"Swift\",\r",
+									"    \"Kotlin\",\r",
+									"    \"PHP\",\r",
+									"    \"TypeScript\"\r",
+									"];\r",
+									"\r",
+									"function getRandomProgrammingLanguage() {\r",
+									"    const randomIndex = Math.floor(Math.random() * programmingLanguages.length);\r",
+									"    return programmingLanguages[randomIndex];\r",
+									"}\r",
+									"\r",
+									"const randomLanguage = getRandomProgrammingLanguage();\r",
+									"\r",
+									"// Set the random language as an environment variable\r",
+									"pm.collectionVariables.set(\"randomLanguage\", randomLanguage);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"category_id\": 5,\r\n  \"name\": \"{{randomLanguage}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8090/skills/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"skills",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userskills",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"skill_id\": 1,\r\n  \"level\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8090/user-skills/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user-skills",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "skill_category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Programming languages\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8090/skills-categories/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"skills-categories",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "jwt create",
 			"event": [
 				{
@@ -90,189 +435,6 @@
 				"description": "### Create Token\n\nThis endpoint is used to create a new token for authentication.\n\n#### Request Body\n\n- `email` (string, required): The email of the user.\n    \n- `password` (string, required): The password of the user.\n    \n\n#### Response\n\nUpon successful execution, the server responds with a status code of 200 and a JSON object containing:\n\n- `refresh` (string): The refresh token for authentication.\n    \n- `access` (string): The access token for authentication."
 			},
 			"response": []
-		},
-		{
-			"name": "user",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Response status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test(\"Response time is within an acceptable range\", function () {\r",
-							"  pm.expect(pm.response.responseTime).to.be.below(300);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test(\"Response has the required fields\", function () {\r",
-							"    const responseData = pm.response.json();\r",
-							"    \r",
-							"    pm.expect(responseData).to.be.an('object');\r",
-							"    pm.expect(responseData.results).to.be.an('array').that.is.not.empty;\r",
-							"\r",
-							"    const requiredFields = [\"id\", \"email\", \"first_name\", \"last_name\", \"is_verified\", \"is_staff\", \"is_superuser\", \"created_date\", \"updated_date\"];\r",
-							"\r",
-							"    responseData.results.forEach(function (result) {\r",
-							"        requiredFields.forEach(function (field) {\r",
-							"            pm.expect(result).to.have.property(field);\r",
-							"        });\r",
-							"    });\r",
-							"});\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"\r",
-							"pm.test(\"Id is a non-negative integer\", function () {\r",
-							"    const responseData = pm.response.json();\r",
-							"    \r",
-							"    pm.expect(responseData.results).to.be.an('array');\r",
-							"    responseData.results.forEach(function(user) {\r",
-							"        pm.expect(user.id).to.be.a('number');\r",
-							"        pm.expect(user.id).to.be.at.least(0, \"Id should be a non-negative integer\");\r",
-							"    });\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Email is in a valid format\", function () {\r",
-							"    const responseData = pm.response.json();\r",
-							"    \r",
-							"    pm.expect(responseData.results).to.be.an('array');\r",
-							"    responseData.results.forEach(function(user) {\r",
-							"        pm.expect(user.email).to.be.a('string');\r",
-							"        pm.expect(user.email).to.match(/\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b/, \"Email should be in a valid format\");\r",
-							"    });\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8090/user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8090",
-					"path": [
-						"user",
-						""
-					]
-				},
-				"description": "The endpoint retrieves a list of users. The response is in JSON format and follows the schema below:\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"links\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"next\": {\n                    \"type\": [\"string\", \"null\"]\n                },\n                \"previous\": {\n                    \"type\": [\"string\", \"null\"]\n                },\n                \"current\": {\n                    \"type\": \"integer\"\n                }\n            }\n        },\n        \"total_items\": {\n            \"type\": \"integer\"\n        },\n        \"total_pages\": {\n            \"type\": \"integer\"\n        },\n        \"results\": {\n            \"type\": \"array\",\n            \"items\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"id\": {\n                        \"type\": \"integer\"\n                    },\n                    \"last_login\": {\n                        \"type\": [\"string\", \"null\"]\n                    },\n                    \"email\": {\n                        \"type\": \"string\"\n                    },\n                    \"first_name\": {\n                        \"type\": \"string\"\n                    },\n                    \"last_name\": {\n                        \"type\": \"string\"\n                    },\n                    \"title\": {\n                        \"type\": [\"string\", \"null\"]\n                    },\n                    \"location\": {\n                        \"type\": [\"string\", \"null\"]\n                    },\n                    \"is_verified\": {\n                        \"type\": \"boolean\"\n                    },\n                    \"is_staff\": {\n                        \"type\": \"boolean\"\n                    },\n                    \"is_superuser\": {\n                        \"type\": \"boolean\"\n                    },\n                    \"created_date\": {\n                        \"type\": \"string\"\n                    },\n                    \"updated_date\": {\n                        \"type\": \"string\"\n                    }\n                }\n            }\n        }\n    }\n}\n\n ```"
-			},
-			"response": []
-		},
-		{
-			"name": "User",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Response status code is 201\", function () {\r",
-							"    pm.expect(pm.response.code).to.equal(201);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test(\"Response time is less than 500ms\", function () {\r",
-							"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test(\"Response has the required fields\", function () {\r",
-							"    const responseData = pm.response.json();\r",
-							"    \r",
-							"    pm.expect(responseData).to.be.an('object');\r",
-							"    pm.expect(responseData).to.have.property('last_login');\r",
-							"    pm.expect(responseData).to.have.property('email');\r",
-							"    pm.expect(responseData).to.have.property('first_name');\r",
-							"    pm.expect(responseData).to.have.property('last_name');\r",
-							"    pm.expect(responseData).to.have.property('title');\r",
-							"    pm.expect(responseData).to.have.property('location');\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.test(\"Email is in a valid format\", function () {\r",
-							"    const responseData = pm.response.json();\r",
-							"    \r",
-							"    pm.expect(responseData.email).to.be.a('string').and.to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);\r",
-							"});\r",
-							"\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"password\": \"123456\",\r\n  \"email\": \"john@john.com\",\r\n  \"first_name\": \"john\",\r\n  \"last_name\": \"raphy\",\r\n  \"title\": \"{{$randomJobTitle}}\",\r\n  \"location\": \"{{$randomCity}}\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8090/user/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8090",
-					"path": [
-						"user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "user",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8090/user/2/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8090",
-					"path": [
-						"user",
-						"2",
-						""
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"auth": {
@@ -315,6 +477,11 @@
 		},
 		{
 			"key": "REFRESH_TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "randomLanguage",
 			"value": "",
 			"type": "string"
 		}

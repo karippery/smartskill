@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ValidationError
 
 from apps.user.models import User
 
@@ -19,7 +20,10 @@ class Skill(models.Model):
 class UserSkill(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     skill_id = models.ForeignKey(Skill, on_delete=models.CASCADE)
-    level = models.IntegerField()
+    level = models.SmallIntegerField()
+    class Meta:
+        unique_together = ('user_id', 'skill_id')
 
     def __str__(self):
         return f"{self.user_id.first_name} - Skill ID: {self.skill_id_id}, Level: {self.level}"
+

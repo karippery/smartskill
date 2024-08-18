@@ -25,8 +25,8 @@ services:
     container_name: smartskill_pgadmin
     image: dpage/pgadmin4:latest
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com  # Replace with your desired admin email
-      PGADMIN_DEFAULT_PASSWORD: admin  # Replace with your desired password
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - "8054:80"  # Host port 8054 mapped to container port 80
     volumes:

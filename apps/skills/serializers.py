@@ -9,15 +9,12 @@ class SkillCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SkillSerializer(serializers.ModelSerializer):
-    category = SkillCategorySerializer()
-
     class Meta:
         model = Skill
-        fields = '__all__'
+        fields = ['category_id', 'name']
 
 class UserSkillsSerializer(serializers.ModelSerializer):
-    skills = SkillSerializer(many=True)
-
     class Meta:
         model = UserSkill
-        fields = '__all__'
+        fields = ['user_id','skill_id','level']
+
