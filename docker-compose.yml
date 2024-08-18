@@ -30,7 +30,7 @@ services:
     ports:
       - "8054:80"  # Host port 8054 mapped to container port 80
     volumes:
-      - ./postgre/data:/var/lib/pgadmin
+      - pgadmin_data:/var/lib/pgadmin
     restart: always
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
@@ -61,7 +61,6 @@ services:
       - app_network
 
 volumes:
-  postgres_data:
   pgadmin_data:
 
 networks:

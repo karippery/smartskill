@@ -1,6 +1,6 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from apps.skills.models import Skill, SkillCategory, UserSkills
+from apps.skills.models import Skill, SkillCategory, UserSkill
 from apps.skills.serializers import SkillCategorySerializer, SkillSerializer, UserSkillsSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -39,7 +39,7 @@ class SkillDetailView(generics.RetrieveUpdateDestroyAPIView):
     pagination_class = DefaultPagination
 
 class UserSkillsListCreateView(generics.ListCreateAPIView):
-    queryset = UserSkills.objects.all()
+    queryset = UserSkill.objects.all()
     serializer_class = UserSkillsSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
@@ -47,7 +47,7 @@ class UserSkillsListCreateView(generics.ListCreateAPIView):
     pagination_class = DefaultPagination
 
 class UserSkillsDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = UserSkills.objects.all()
+    queryset = UserSkill.objects.all()
     serializer_class = UserSkillsSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]

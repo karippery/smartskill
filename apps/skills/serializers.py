@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.skills.models import Skill, SkillCategory, UserSkills
+from apps.skills.models import Skill, SkillCategory, UserSkill
 
 
 class SkillCategorySerializer(serializers.ModelSerializer):
@@ -19,5 +19,5 @@ class UserSkillsSerializer(serializers.ModelSerializer):
     skills = SkillSerializer(many=True)
 
     class Meta:
-        model = UserSkills
+        model = UserSkill
         fields = '__all__'
