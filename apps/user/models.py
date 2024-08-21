@@ -1,10 +1,8 @@
 # models.py
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin
-#AbstractBaseUser is used to define the fields and behaviors of the User model,
-# while BaseUserManager provides methods for creating instances of that model.
 from django.utils.translation import gettext_lazy as _ #translated into the end user’s language
-
+from django.utils import timezone
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -54,3 +52,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+
+class PasswordResetToken(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.CharField(max_length=255, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def is_valid(self):
+        # Token is valid for 1 hour
+        expiration_time = self.created_at + timezone.timedelta(hours=1)
+        return timezone.now() < expiration_time
