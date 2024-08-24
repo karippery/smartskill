@@ -61,6 +61,7 @@ media/
 # Django migrations
 apps/skills/migrations/0*.py
 apps/user/migrations/0*.py
+apps/experiences/migrations/0*.py
 
 # IDE specific files
 .idea/

@@ -1,15 +1,11 @@
 
-from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from apps.skills.models import Skill, SkillCategory, UserSkill
 from apps.skills.serializers import SkillCategorySerializer, SkillSerializer, UserSkillsSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from apps.user.models import User
 from core.utils.paginations import DefaultPagination
-from rest_framework.response import Response
-from rest_framework import status
 class SkillCategoryListCreateView(generics.ListCreateAPIView):
     queryset = SkillCategory.objects.all().order_by('name')
     serializer_class = SkillCategorySerializer

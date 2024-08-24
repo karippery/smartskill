@@ -36,6 +36,7 @@ urlpatterns = [
 
     path('', include('apps.user.urls')),
     path('', include('apps.skills.urls')),
+    path('', include('apps.experiences.urls')),
 
 ]
 

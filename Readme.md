@@ -48,10 +48,20 @@ Use Docker Compose to run the application:
     APP_NAME="Smart Skill"
     APP_DESCRIPTION="This is a web application designed to streamline the process of employee skill management within a company."
     APP_VERSION="1.0.0"
+
+
     DATABASE_NAME=postgres
     DATABASE_USER=postgres
     DATABASE_PASSWORD=postgres
     DATABASE_PORT=5432
+
+    EMAIL_HOST_USER = 'your_email@gmail.com'
+    EMAIL_HOST_PASSWORD = 'your_password_or_app_password'
+    DEFAULT_FROM_EMAIL = 'your_email@gmail.com'
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
 
 ```
 

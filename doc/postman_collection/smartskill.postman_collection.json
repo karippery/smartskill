@@ -11,6 +11,44 @@
 			"name": "user",
 			"item": [
 				{
+					"name": "forgot_password",
+					"item": [
+						{
+							"name": "password-reset",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"john.karippery@yahoo.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8090/user/password-reset/",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8090",
+									"path": [
+										"user",
+										"password-reset",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "user",
 					"event": [
 						{
@@ -319,6 +357,41 @@
 					"response": []
 				},
 				{
+					"name": "userskills",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"skill_id\": 1,\r\n  \"level\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8090/user-skills/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user-skills",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "skill_category",
 					"request": {
 						"method": "POST",
@@ -345,6 +418,185 @@
 							"path": [
 								"skills-categories",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "skill_category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Programming languages\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8090/skills-categories/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"skills-categories",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "skills by user_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8090/user-skills/details/2/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user-skills",
+								"details",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "details",
+			"item": [
+				{
+					"name": "skill by user_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8090/user-skills/details/2/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"user-skills",
+								"details",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "experiences",
+			"item": [
+				{
+					"name": "experiences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8090/experiences/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"experiences",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "experiences",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 2,\r\n  \"job_title\": \"Backend Developer\",\r\n  \"company_name\": \"Google\",\r\n  \"start_date\": \"2022-02-24\",\r\n  \"end_date\": \"2024-08-24\",\r\n  \"is_current\": true,\r\n  \"description\": \"string\",\r\n  \"location\": \"Berlin\",\r\n  \"skills_used\": [\r\n    1\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8090/experiences/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"experiences",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "experiences by userid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8090/experiences/?user_id=2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8090",
+							"path": [
+								"experiences",
+								""
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "2"
+								}
 							]
 						}
 					},
