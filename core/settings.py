@@ -192,12 +192,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = ['127.0.0.1', '172.17.0.1'] + [ip[: ip.rfind('.')] + ".1" for ip in ips]
 
-
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+#Password Reset Config Simple Mail Transfer Protocol
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST = config('EMAIL_HOST', default="smtp.gmail.com")
+EMAIL_PORT = config('EMAIL_PORT', default=58)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default="myemail@gmail.com")  # Your Gmail address
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default="emailpassword")  # Your Gmail password or App Password
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default="myemail@gmail.com")
