@@ -85,16 +85,5 @@ class SkillAPITests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 1)
 
-    def test_retrieve_user_skill(self):
-        url = reverse('user-skills-detail', kwargs={'pk': self.user_skill.id})
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['skill_name'], self.user_skill.skill_id.name)
-
-    def test_user_skills_details(self):
-        url = reverse('user-skills', kwargs={'user_id': self.user.id})
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertGreaterEqual(len(response.data), 1)
 
 

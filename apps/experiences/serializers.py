@@ -15,6 +15,11 @@ class ExperienceSerializer(serializers.ModelSerializer):
     def get_user_name(self, obj):
         return obj.user_id.first_name
 
+    def validate(self, data):
+        if data.get('end_date') and data['start_date'] > data['end_date']:
+            raise serializers.ValidationError("End date cannot be before start date.")
+        return data
+
     def get_skills(self, obj):
         return SkillSerializer(obj.skills_used, many=True).data
 
