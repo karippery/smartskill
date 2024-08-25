@@ -36,3 +36,7 @@ class Qualification(models.Model):
             models.Index(fields=['user_id', 'degree']),
         ]
 
+    constraints = [
+            models.UniqueConstraint(fields=['user_id', 'degree', 'field_of_study'], name='unique_degree_field_for_user')
+        ]
+
