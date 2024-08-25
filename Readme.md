@@ -22,6 +22,8 @@ Smart-Skill is a web application designed to streamline the process of employee 
 - Django 4.2
 - docker (docker-desktop)
 
+![alt text](doc/image.png)
+
 ### Installation
 1. Clone the repository:
     ```bash
@@ -64,6 +66,15 @@ Use Docker Compose to run the application:
     EMAIL_USE_TLS = True
 
 ```
+#### Create Super User
+
+The superuser has full access to Django’s built-in admin interface, which allows you to manage your application’s data and users easily.
+
+```
+    python manage.py createsuperuser
+
+```
+
 
 # PgAdmin Access and Usage
 
