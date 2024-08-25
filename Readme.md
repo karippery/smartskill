@@ -165,3 +165,15 @@ To run the command and generate fake data for all apps, use the following comman
     python manage.py create_fake_data
 
 ```
+
+## Running Tests with Pytest
+To run tests for your Django project using pytest
+
+#### Run Tests:
+Use the following command to run tests for a specific app:
+
+```
+    python manage.py test apps.apps_name
+
+```
+
