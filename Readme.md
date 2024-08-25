@@ -153,3 +153,15 @@ ReDoc offers a different style of interactive API documentation. It is another w
 
 1. Open your web browser.
 2. Navigate to `http://localhost:8090/api/schema/redoc/`.
+
+
+## Generating Fake Data with Faker Library
+This project uses the Faker library to generate fake data for various applications. Faker is a Python package that generates fake data for you. Whether you need to populate a database, create realistic test data, or anonymize data, Faker can help.
+
+### Running the Command
+To run the command and generate fake data for all apps, use the following command in your terminal:
+
+```
+    python manage.py create_fake_data
+
+```

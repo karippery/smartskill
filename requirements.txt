@@ -8,3 +8,4 @@ psycopg2-binary>=2.9
 django-filter
 
 django-debug-toolbar
+faker
