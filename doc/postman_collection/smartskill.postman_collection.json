@@ -464,7 +464,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8090/user-skills/details/2/",
+							"raw": "http://127.0.0.1:8090/user-skills/?user_id=1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -475,9 +475,13 @@
 							"port": "8090",
 							"path": [
 								"user-skills",
-								"details",
-								"2",
 								""
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
 							]
 						}
 					},

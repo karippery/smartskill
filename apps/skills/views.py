@@ -54,14 +54,8 @@ class UserSkillsDetailView(generics.RetrieveUpdateDestroyAPIView):
     search_fields = []
     pagination_class = DefaultPagination
 
-class UserSkillsDetailAPIView(generics.ListAPIView):
-    queryset = UserSkill.objects.all()
-    serializer_class = UserSkillsSerializer
-    permission_classes = [IsAuthenticated]
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    search_fields = []
-    pagination_class = DefaultPagination
-
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         return UserSkill.objects.filter(user_id=user_id).select_related('skill_id__category_id')
+
+
