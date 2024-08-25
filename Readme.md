@@ -153,3 +153,33 @@ ReDoc offers a different style of interactive API documentation. It is another w
 
 1. Open your web browser.
 2. Navigate to `http://localhost:8090/api/schema/redoc/`.
+
+
+## Mock Data Management Command
+The load_mock_data management command is a custom Django command designed to load mock data into your database from JSON files. This is useful for populating your database with initial data during development or testing.
+### How It Works
+Locate the JSON File: The command looks for a mock_data.json file in the specified app directory.
+
+Read the JSON Data: The JSON file should contain data in the following format:
+
+```
+     {
+        "ModelName": [
+            { "field1": "value1", "field2": "value2" },
+            ...
+        ],
+        ...
+    }
+
+```
+
+Load Data into Database: The command will create instances of the models specified in the JSON file and populate the database with the provided data.
+
+### Run the Command
+
+Use the load_mock_data command with the --apps option to specify the apps for which you want to load data. You can list multiple apps separated by spaces.
+
+```
+     python manage.py load_mock_data --apps app1 app2
+
+```

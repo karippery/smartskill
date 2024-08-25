@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.user',
     'apps.skills',
     'apps.experiences',
+    'apps.qualifications',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
