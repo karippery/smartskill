@@ -139,6 +139,7 @@ DATABASES = {
         'PASSWORD': config('DATABASE_PASSWORD', default="postgres"),
         'HOST': 'db',  # This is the service name in docker-compose
         'PORT': config('DATABASE_PORT'),
+        'CONN_MAX_AGE': 600,  # Keep connections open for 10 minutes
     }
 }
 
@@ -203,3 +204,18 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default="myemail@gmail.com")  # Your Gmail address
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default="emailpassword")  # Your Gmail password or App Password
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default="myemail@gmail.com")
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://smartskill_redis:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+# Session Engine
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'

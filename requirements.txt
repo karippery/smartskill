@@ -1,11 +1,28 @@
+# Core Django
 Django==4.2
+
+# REST Framework
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
-python-decouple
-django-rest-swagger==2.1.2
 drf-spectacular
+
+# Configuration
+python-decouple
+
+# API Documentation
+django-rest-swagger==2.1.2
+
+# Database
 psycopg2-binary>=2.9
+
+# Filtering
 django-filter
 
+# Caching
+django-redis
+
+# Debugging
 django-debug-toolbar
+
+# Data Generation
 faker
