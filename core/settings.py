@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drf_spectacular',
-    'debug_toolbar'
+    'debug_toolbar',
+    'django_celery_beat',
 
 ]
 
@@ -219,3 +220,11 @@ CACHES = {
 # Session Engine
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
+
+# Celery configuration
+CELERY_BROKER_URL = 'redis://smartskill_redis:6379/2'  # Redis database 2 for Celery
+CELERY_RESULT_BACKEND = 'redis://smartskill_redis:6379/2'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'

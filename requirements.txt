@@ -26,3 +26,7 @@ django-debug-toolbar
 
 # Data Generation
 faker
+
+#Asynchronous and scheduled tasks
+celery
+django-celery-beat
