@@ -30,3 +30,6 @@ faker
 #Asynchronous and scheduled tasks
 celery
 django-celery-beat
+
+#Storage static and media files
+django-minio-storage

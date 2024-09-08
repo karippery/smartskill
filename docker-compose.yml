@@ -61,8 +61,8 @@ services:
     ports:
       - "8090:8090"
     depends_on:
-      db:
-        condition: service_healthy
+      - db
+      - minio
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings
     restart: always
@@ -78,6 +78,7 @@ services:
     depends_on:
       - redis
       - db
+      - minio
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings
     restart: always
@@ -93,14 +94,32 @@ services:
     depends_on:
       - redis
       - db
+      - minio
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings
     restart: always
     networks:
       - app_network
 
+  minio:
+    container_name: smartskill_minio
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./minio/data:/data  # Ensure data persists locally
+    restart: always
+    networks:
+      - app_network
+
 volumes:
   pgadmin_data:
+  minio_data:
 
 networks:
   app_network:

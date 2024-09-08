@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-h4!la5=krt44%^1!j#rmt&*p8iqbeu=$%-e27z^@%1=^m0lr$_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+from core.minio_config import *
 
 ALLOWED_HOSTS = []
 
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'debug_toolbar',
     'django_celery_beat',
+    'minio_storage',
 
 ]
 
@@ -228,3 +230,28 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
+
+
+
+STATICFILES_STORAGE = 'minio_storage.storage.MinioStaticStorage'
+DEFAULT_FILE_STORAGE = 'minio_storage.storage.MinioMediaStorage'
+MINIO_STORAGE_ENDPOINT = config("MINIO_STORAGE_ENDPOINT", default="minio:9000", cast=str)
+MINIO_STORAGE_ACCESS_KEY = config("MINIO_STORAGE_ACCESS_KEY")
+MINIO_STORAGE_SECRET_KEY = config("MINIO_STORAGE_SECRET_KEY")
+MINIO_STORAGE_USE_HTTPS = config("MINIO_STORAGE_USE_HTTPS", cast=bool, default=False)
+MINIO_STORAGE_MEDIA_BUCKET_NAME = config("MINIO_STORAGE_MEDIA_BUCKET_NAME")
+MINIO_STORAGE_STATIC_BUCKET_NAME = config("MINIO_STORAGE_STATIC_BUCKET_NAME")
+MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
+MINIO_STORAGE_AUTO_CREATE_STATIC_BUCKET = True
+MINIO_STORAGE_MEDIA_URL = config("MINIO_STORAGE_MEDIA_URL", default="http://localhost:9000/media/", cast=str)
+MINIO_STORAGE_STATIC_URL = config("MINIO_STORAGE_STATIC_URL", default="http://localhost:9000/static/", cast=str)
+MINIO_STORAGE_MEDIA_USE_PRESIGNED = False
+MINIO_STORAGE_STATIC_USE_PRESIGNED = False
+
+STATIC_ROOT = './static_files/'
+MEDIA_ROOT = './media_files/'
+
+
+# Static and media URLs
+STATIC_URL = f'http://{MINIO_STORAGE_ENDPOINT}/{MINIO_STORAGE_STATIC_BUCKET_NAME}/'
+MEDIA_URL = f'http://{MINIO_STORAGE_ENDPOINT}/{MINIO_STORAGE_MEDIA_BUCKET_NAME}/'

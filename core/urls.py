@@ -24,6 +24,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 from decouple import config
 from django.urls import include, path
 import debug_toolbar
+from django.conf.urls.static import static
 
 APP_NAME_API = config('APP_NAME_API', default='default_app_name')
 API_VERSION = config('API_VERSION', default='v1')
@@ -44,6 +45,10 @@ urlpatterns = [
     path(f'{APP_NAME_API}/v{API_VERSION}/qualifications/', include('apps.qualifications.urls')),
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 
 if settings.DEBUG:
     urlpatterns += [

@@ -57,6 +57,9 @@ celerybeat-schedule.*
 static/
 media/
 
+#minio
+minio/
+
 
 # Django migrations
 apps/skills/migrations/0*.py
