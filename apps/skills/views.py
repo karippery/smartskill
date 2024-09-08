@@ -6,6 +6,9 @@ from apps.skills.serializers import SkillCategorySerializer, SkillSerializer, Us
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from core.utils.paginations import DefaultPagination
+from drf_spectacular.utils import extend_schema
+
+@extend_schema(tags=["skill-category"])
 class SkillCategoryListCreateView(generics.ListCreateAPIView):
     queryset = SkillCategory.objects.all().order_by('name')
     serializer_class = SkillCategorySerializer
@@ -14,6 +17,7 @@ class SkillCategoryListCreateView(generics.ListCreateAPIView):
     search_fields = ["name"]
     pagination_class = DefaultPagination
 
+@extend_schema(tags=["skill-category"])
 class SkillCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = SkillCategory.objects.all().order_by('name')
     serializer_class = SkillCategorySerializer
@@ -22,6 +26,7 @@ class SkillCategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     search_fields = ["name"]
     pagination_class = DefaultPagination
 
+@extend_schema(tags=["skill"])
 class SkillListCreateView(generics.ListCreateAPIView):
     queryset = Skill.objects.all().order_by('name')
     serializer_class = SkillSerializer
@@ -30,6 +35,7 @@ class SkillListCreateView(generics.ListCreateAPIView):
     search_fields = ["name"]
     pagination_class = DefaultPagination
 
+@extend_schema(tags=["skill"])
 class SkillDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Skill.objects.all().order_by('name')
     serializer_class = SkillSerializer
@@ -38,6 +44,7 @@ class SkillDetailView(generics.RetrieveUpdateDestroyAPIView):
     search_fields = ["name"]
     pagination_class = DefaultPagination
 
+@extend_schema(tags=["user-skills"])
 class UserSkillsListCreateView(generics.ListCreateAPIView):
     queryset = UserSkill.objects.all().order_by('user_id', 'skill_id')
     serializer_class = UserSkillsSerializer
@@ -46,6 +53,7 @@ class UserSkillsListCreateView(generics.ListCreateAPIView):
     search_fields = []
     pagination_class = DefaultPagination
 
+@extend_schema(tags=["user-skills"])
 class UserSkillsDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserSkill.objects.all().order_by('user_id', 'skill_id')
     serializer_class = UserSkillsSerializer

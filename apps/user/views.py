@@ -13,7 +13,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework import generics
 from django.core.mail import send_mail
+from drf_spectacular.utils import extend_schema
 
+@extend_schema(tags=["user"])
 class UserListCreateView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -33,6 +35,7 @@ class UserListCreateView(generics.ListCreateAPIView):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+@extend_schema(tags=["user"])
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -52,19 +55,22 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
 
+@extend_schema(tags=["password-reset"])
 class PasswordResetRequestView(generics.GenericAPIView):
+    serializer_class = PasswordResetRequestSerializer
 
     def post(self, request):
-        serializer = PasswordResetRequestSerializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         email = serializer.validated_data['email']
         user = User.objects.get(email=email)
-        token = uuid.uuid4().hex  # Generate a random token
+        token = uuid.uuid4().hex
         PasswordResetToken.objects.create(user=user, token=token)
 
         try:
@@ -89,6 +95,8 @@ class PasswordResetRequestView(generics.GenericAPIView):
 
         return Response({"detail": "A password reset link has been sent to your email."}, status=status.HTTP_200_OK)
 
+
+@extend_schema(tags=["password-reset"])
 class PasswordResetConfirmView(generics.GenericAPIView):
     serializer_class = PasswordResetSerializer
 

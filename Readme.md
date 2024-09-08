@@ -48,8 +48,10 @@ Use Docker Compose to run the application:
 
 ```
     APP_NAME="Smart Skill"
+    APP_NAME_API="smartskill"
     APP_DESCRIPTION="This is a web application designed to streamline the process of employee skill management within a company."
     APP_VERSION="1.0.0"
+    API_VERSION=1
 
 
     DATABASE_NAME=postgres
@@ -64,6 +66,11 @@ Use Docker Compose to run the application:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
+
+
+    Secret_key = 'D2XV182E3PP4Z14YBEUB7K21'
+
+    SENDGRID_API_KEY = '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'
 
 ```
 #### Create Super User

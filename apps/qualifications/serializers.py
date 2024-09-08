@@ -1,4 +1,4 @@
-from apps.qualifications.models import Qualification
+from apps.qualifications.models import Degree, FieldOfStudy, Qualification
 from rest_framework import serializers
 
 class QualificationSerializer(serializers.ModelSerializer):
@@ -13,3 +13,13 @@ class QualificationSerializer(serializers.ModelSerializer):
             if start_date > end_date:
                 raise serializers.ValidationError("End date must be after start date.")
         return data
+
+class DegreeSerializer(serializers.ModelSerializer):
+      class Meta:
+        model = Degree
+        fields = '__all__'
+
+class FieldOfStudySerializer(serializers.ModelSerializer):
+      class Meta:
+        model = FieldOfStudy
+        fields = '__all__'

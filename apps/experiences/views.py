@@ -7,7 +7,9 @@ from apps.experiences.models import Experience
 from apps.experiences.serializers import ExperienceSerializer
 from core.utils.paginations import DefaultPagination
 from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema
 
+@extend_schema(tags=["experiences"])
 class ExperiencesDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Experience.objects.all()
     serializer_class = ExperienceSerializer
@@ -28,6 +30,7 @@ class ExperiencesDetailView(generics.RetrieveUpdateDestroyAPIView):
         instance = serializer.save()
         return Response(serializer.data)
 
+@extend_schema(tags=["experiences"])
 class ExperiencesListCreateView(generics.ListCreateAPIView):
     queryset = Experience.objects.all().order_by('start_date')
     serializer_class = ExperienceSerializer

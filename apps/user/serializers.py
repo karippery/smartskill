@@ -23,9 +23,12 @@ class PasswordResetRequestSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
     def validate_email(self, value):
-        if not User.objects.filter(email=value).exists():
-            raise serializers.ValidationError("There is no user registered with this email address.")
-        return value
+        # Normalize the email by lowercasing it, assuming case-insensitive emails
+        email = value.lower().strip()
+        if not User.objects.filter(email=email).exists():
+            raise serializers.ValidationError("No account is associated with this email address.")
+        return email
+
 
 class PasswordResetSerializer(serializers.Serializer):
     token = serializers.CharField()
