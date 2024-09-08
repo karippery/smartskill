@@ -40,7 +40,16 @@ services:
     networks:
       - app_network
 
-  smarkskill:
+  redis:
+    container_name: smartskill_redis
+    image: redis:alpine
+    command: redis-server --bind 0.0.0.0
+    ports:
+      - "6379:6379"
+    networks:
+      - app_network
+
+  smartskill:
     container_name: smartskill
     build: .
     command: sh -c "python manage.py makemigrations &&
@@ -54,6 +63,36 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings
+    restart: always
+    networks:
+      - app_network
+
+  celery:
+    container_name: smartskill_celery
+    build: .
+    command: celery -A core.celery worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings
+    restart: always
+    networks:
+      - app_network
+
+  celery-beat:
+    container_name: smartskill_celery_beat
+    build: .
+    command: celery -A core.celery beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - db
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings
     restart: always

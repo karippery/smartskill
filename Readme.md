@@ -176,4 +176,33 @@ Use the following command to run tests for a specific app:
     python manage.py test apps.apps_name
 
 ```
+## Caching
+
+### Redis
+Redis for caching in your Django project, you can still use Redis as the message broker for Celery. This is a common and efficient setup because Redis is capable of handling both caching and task queuing simultaneously. Improves application performance by caching frequently accessed data and managing task queues. This reduces database load and speeds up response times.
+
+    smartskill/
+    ├── core/
+    │   apps.py
+    │   celery.py
+    │   ....
+    │
+    ├───cache
+    │       caches.py
+    │       decorators.py
+    │       signals.py
+    │       utils.py
+    │       __init__.py
+
+### Celery
+Celery is a powerful, distributed task queue that can handle asynchronous and scheduled tasks in Django applications. Celery in your Django project for the Smart-Skill application is a great way to handle background tasks like sending notifications, updating analytics, or processing reports. Handles background and scheduled tasks, allowing your application to perform complex or time-consuming operations asynchronously. This ensures that your application remains responsive and efficient.
+
+    smartskill/
+    ├── core/
+    │   ├── __init__.py
+    │   ├── celery.py
+    │   ├── settings.py
+    │   └── ...
+    ├── manage.py
+    └── Dockerfile
 
