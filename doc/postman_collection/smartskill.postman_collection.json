@@ -28,17 +28,11 @@
 									}
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8090/user/password-reset/",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}users/password-reset/",
 									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
+										"{{LOCAL_URL}}users"
 									],
-									"port": "8090",
 									"path": [
-										"user",
 										"password-reset",
 										""
 									]
@@ -115,17 +109,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8090/user/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}users/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}users"
 							],
-							"port": "8090",
 							"path": [
-								"user",
 								""
 							]
 						},
@@ -190,17 +178,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/user/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}users/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}users"
 							],
-							"port": "8090",
 							"path": [
-								"user",
 								""
 							]
 						}
@@ -213,17 +195,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8090/user/2/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}users/2/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}users"
 							],
-							"port": "8090",
 							"path": [
-								"user",
 								"2",
 								""
 							]
@@ -242,17 +218,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8090/skills/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}skills/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}skills"
 							],
-							"port": "8090",
 							"path": [
-								"skills",
 								""
 							]
 						}
@@ -299,7 +269,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"category_id\": 5,\r\n  \"name\": \"{{randomLanguage}}\"\r\n}",
+							"raw": "{\r\n  \"category_id\": 2,\r\n  \"name\": \"{{randomLanguage}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -307,17 +277,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/skills/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}skills/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}skills"
 							],
-							"port": "8090",
 							"path": [
-								"skills",
 								""
 							]
 						}
@@ -339,15 +303,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/user-skills/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}skills/user-skills/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}skills"
 							],
-							"port": "8090",
 							"path": [
 								"user-skills",
 								""
@@ -374,15 +333,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/user-skills/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}skills/user-skills/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}skills"
 							],
-							"port": "8090",
 							"path": [
 								"user-skills",
 								""
@@ -441,15 +395,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/skills-categories/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}skills/skills-categories/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}skills"
 							],
-							"port": "8090",
 							"path": [
 								"skills-categories",
 								""
@@ -464,15 +413,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8090/user-skills/?user_id=1",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}skills/user-skills/?user_id=1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}skills"
 							],
-							"port": "8090",
 							"path": [
 								"user-skills",
 								""
@@ -490,36 +434,6 @@
 			]
 		},
 		{
-			"name": "details",
-			"item": [
-				{
-					"name": "skill by user_id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8090/user-skills/details/2/",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8090",
-							"path": [
-								"user-skills",
-								"details",
-								"2",
-								""
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "experiences",
 			"item": [
 				{
@@ -528,17 +442,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8090/experiences/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}experiences/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}experiences"
 							],
-							"port": "8090",
 							"path": [
-								"experiences",
 								""
 							]
 						}
@@ -560,17 +468,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8090/experiences/",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}experiences/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}experiences"
 							],
-							"port": "8090",
 							"path": [
-								"experiences",
 								""
 							]
 						}
@@ -583,17 +485,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8090/experiences/?user_id=2",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}experiences/?user_id=2",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{LOCAL_URL}}experiences"
 							],
-							"port": "8090",
 							"path": [
-								"experiences",
 								""
 							],
 							"query": [
@@ -674,15 +570,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8090/token/create",
-					"protocol": "http",
+					"raw": "{{LOCAL_URL}}users/token/create",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{LOCAL_URL}}users"
 					],
-					"port": "8090",
 					"path": [
 						"token",
 						"create"
@@ -738,6 +629,11 @@
 		},
 		{
 			"key": "randomLanguage",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "LOCAL_URL",
 			"value": "",
 			"type": "string"
 		}

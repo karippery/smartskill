@@ -18,26 +18,30 @@ from django.shortcuts import redirect
 from django.urls import path, include
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
 from django.contrib import admin
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-from django.conf import settings
+from decouple import config
 from django.urls import include, path
 import debug_toolbar
+
+APP_NAME_API = config('APP_NAME_API', default='default_app_name')
+API_VERSION = config('API_VERSION', default='v1')
 
 def redirect_to_swagger(request):
     return redirect('schema-swagger-ui')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path(f'{APP_NAME_API}/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='schema-swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('', redirect_to_swagger),  # Ensure this is after all other paths to avoid conflicts
 
-    path('', include('apps.user.urls')),
-    path('', include('apps.skills.urls')),
-    path('', include('apps.experiences.urls')),
-    path('', include('apps.qualifications.urls')),
+    path(f'{APP_NAME_API}/v{API_VERSION}/users/', include('apps.user.urls')),
+    path(f'{APP_NAME_API}/v{API_VERSION}/skills/', include('apps.skills.urls')),
+    path(f'{APP_NAME_API}/v{API_VERSION}/experiences/', include('apps.experiences.urls')),
+    path(f'{APP_NAME_API}/v{API_VERSION}/qualifications/', include('apps.qualifications.urls')),
 
 ]
 

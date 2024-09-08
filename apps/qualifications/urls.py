@@ -10,7 +10,7 @@ router.register(r'fields-of-study', FieldOfStudyViewSet, basename='fieldofstudy'
 
 
 urlpatterns = [
-    path('qualifications/', QualificationListCreateAPIView.as_view(), name='qualification-list-create'),
-    path('qualifications/<int:pk>/', QualificationRetrieveUpdateDestroyAPIView.as_view(), name='qualification-detail'),
+    path('', QualificationListCreateAPIView.as_view(), name='qualification-list-create'),
+    path('<int:pk>/', QualificationRetrieveUpdateDestroyAPIView.as_view(), name='qualification-detail'),
     path('', include(router.urls)),
 ]
