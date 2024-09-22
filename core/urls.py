@@ -60,6 +60,10 @@ urlpatterns = [
         f"{APP_NAME_API}/v{API_VERSION}/qualifications/",
         include("apps.qualifications.urls"),
     ),
+    path(
+        f"{APP_NAME_API}/v{API_VERSION}/projects/",
+        include("apps.projects.urls"),
+    ),
 ]
 
 if settings.DEBUG:
