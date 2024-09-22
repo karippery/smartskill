@@ -49,7 +49,7 @@ class LanguageRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView
     serializer_class = LanguageSerializer
 
 
-@extend_schema(tags=["project"])
+@extend_schema(tags=["project-role"])
 class ProjectRoleListCreateAPIView(generics.ListCreateAPIView):
     queryset = ProjectRole.objects.all()
     serializer_class = ProjectRoleSerializer
@@ -59,13 +59,13 @@ class ProjectRoleListCreateAPIView(generics.ListCreateAPIView):
     pagination_class = DefaultPagination
 
 
-@extend_schema(tags=["project"])
+@extend_schema(tags=["project-role"])
 class ProjectRoleRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProjectRole.objects.all()
     serializer_class = ProjectRoleSerializer
 
 
-@extend_schema(tags=["project"])
+@extend_schema(tags=["project-language"])
 class ProjectLanguageListCreateAPIView(generics.ListCreateAPIView):
     queryset = ProjectLanguage.objects.all()
     serializer_class = ProjectLanguageSerializer
@@ -75,7 +75,7 @@ class ProjectLanguageListCreateAPIView(generics.ListCreateAPIView):
     pagination_class = DefaultPagination
 
 
-@extend_schema(tags=["project"])
+@extend_schema(tags=["project-language"])
 class ProjectLanguageRetrieveUpdateDestroyAPIView(
     generics.RetrieveUpdateDestroyAPIView
 ):
@@ -83,7 +83,7 @@ class ProjectLanguageRetrieveUpdateDestroyAPIView(
     serializer_class = ProjectLanguageSerializer
 
 
-@extend_schema(tags=["project"])
+@extend_schema(tags=["project-skill"])
 class ProjectSkillListCreateAPIView(generics.ListCreateAPIView):
     queryset = ProjectSkill.objects.all()
     serializer_class = ProjectSkillSerializer
@@ -93,7 +93,7 @@ class ProjectSkillListCreateAPIView(generics.ListCreateAPIView):
     pagination_class = DefaultPagination
 
 
-@extend_schema(tags=["project"])
+@extend_schema(tags=["project-skill"])
 class ProjectSkillRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProjectSkill.objects.all()
     serializer_class = ProjectSkillSerializer
