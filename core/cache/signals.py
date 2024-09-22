@@ -1,6 +1,8 @@
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
+
 from apps.user.models import User
+
 from .caches import invalidate_user_cache
 
 

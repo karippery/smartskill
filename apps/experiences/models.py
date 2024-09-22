@@ -1,10 +1,12 @@
 from django.db import models
-from django.forms import ValidationError
 
 from apps.user.models import User
 
+
 class Experience(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='experiences')
+    user_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="experiences"
+    )
     job_title = models.CharField(max_length=100)
     company_name = models.CharField(max_length=100)
     start_date = models.DateField()
@@ -12,7 +14,7 @@ class Experience(models.Model):
     is_current = models.BooleanField(default=False)
     description = models.TextField(blank=True)
     location = models.CharField(max_length=100)
-    skills_used = models.ManyToManyField('skills.Skill', blank=True)
+    skills_used = models.ManyToManyField("skills.Skill", blank=True)
 
     class Meta:
-            ordering = ['-start_date']
+        ordering = ["-start_date"]

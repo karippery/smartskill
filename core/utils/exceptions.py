@@ -1,5 +1,5 @@
-
 from rest_framework.views import exception_handler
+
 
 def custom_exception_handler(exc, context):
     # Call DRF's default exception handler first
@@ -12,14 +12,18 @@ def custom_exception_handler(exc, context):
         response.data = {
             "error": {
                 "status_code": response.status_code,
-                "message": "An error occurred" if response.status_code >= 500 else "Bad request",
+                "message": (
+                    "An error occurred"
+                    if response.status_code >= 500
+                    else "Bad request"
+                ),
                 "details": {
-                    #"detail": error_details.get('detail', 'No additional details provided.'),
-                    #"code": error_details.get('code', 'unknown_error'),
-                   #"message": error_details.get('message', error_details)
+                    # "detail": error_details.get('detail', 'No additional details provided.'),
+                    # "code": error_details.get('code', 'unknown_error'),
+                    # "message": error_details.get('message', error_details)
                     "message": format_error_messages(error_details)
-                    #"message": error_details.get('message', error_details.get('non_field_errors', 'No additional message provided.'))
-                }
+                    # "message": error_details.get('message', error_details.get('non_field_errors', 'No additional message provided.'))
+                },
             }
         }
     else:
@@ -28,10 +32,7 @@ def custom_exception_handler(exc, context):
             "error": {
                 "status_code": 500,
                 "message": "An unexpected error occurred",
-                "details": {
-                    "detail": str(exc),
-                    "code": "unexpected_error"
-                }
+                "details": {"detail": str(exc), "code": "unexpected_error"},
             }
         }
 
