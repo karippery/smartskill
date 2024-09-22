@@ -2,6 +2,7 @@ from django.db import models
 
 from apps.user.models import User
 
+
 class Degree(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
@@ -9,7 +10,8 @@ class Degree(models.Model):
         return self.name
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
+
 
 class FieldOfStudy(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -18,10 +20,13 @@ class FieldOfStudy(models.Model):
         return self.name
 
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
+
 
 class Qualification(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='qualifications')
+    user_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="qualifications"
+    )
     degree = models.ForeignKey(Degree, on_delete=models.CASCADE)
     institution = models.CharField(max_length=255, null=True, blank=True)
     field_of_study = models.ForeignKey(FieldOfStudy, on_delete=models.CASCADE)
@@ -31,12 +36,14 @@ class Qualification(models.Model):
     description = models.TextField(null=True, blank=True)
 
     class Meta:
-        ordering = ['-end_date']
+        ordering = ["-end_date"]
         indexes = [
-            models.Index(fields=['user_id', 'degree']),
+            models.Index(fields=["user_id", "degree"]),
         ]
 
     constraints = [
-            models.UniqueConstraint(fields=['user_id', 'degree', 'field_of_study'], name='unique_degree_field_for_user')
-        ]
-
+        models.UniqueConstraint(
+            fields=["user_id", "degree", "field_of_study"],
+            name="unique_degree_field_for_user",
+        )
+    ]

@@ -1,15 +1,19 @@
 # Smart-Skill
 
 ## Project Name
+
 **Smart Skill**
 
 ## Platform
+
 **Django**
 
 ## Description
+
 Smart-Skill is a web application designed to streamline the process of employee skill management within a company. With a large number of employees, it can be challenging for a company to identify the perfect candidate for a new project. This application aims to solve this problem by providing a platform to store and manage employee skills and skill levels.
 
 ## Features
+
 - Store and manage employee skills
 - Track skill levels
 - Identify suitable candidates for projects
@@ -18,6 +22,7 @@ Smart-Skill is a web application designed to streamline the process of employee 
 ## Getting Started
 
 ### Prerequisites
+
 - Python 3.10.0
 - Django 4.2
 - docker (docker-desktop)
@@ -25,24 +30,25 @@ Smart-Skill is a web application designed to streamline the process of employee 
 ![alt text](doc/image.png)
 
 ### Installation
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/smart-skill.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd smart-skill
-    ```
 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/smart-skill.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd smart-skill
+   ```
 
 ### Run the Application
-Use Docker Compose to run the application:
-1. Build and start the containers:
-    ```bash
-    docker-compose up --build -d
-    ```
-2. The application will be available at `http://127.0.0.1:8090/`.
 
+Use Docker Compose to run the application:
+
+1. Build and start the containers:
+   ```bash
+   docker-compose up --build -d
+   ```
+2. The application will be available at `http://127.0.0.1:8090/`.
 
 ### .env file
 
@@ -73,6 +79,7 @@ Use Docker Compose to run the application:
     SENDGRID_API_KEY = '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'
 
 ```
+
 #### Create Super User
 
 The superuser has full access to Django’s built-in admin interface, which allows you to manage your application’s data and users easily.
@@ -82,9 +89,7 @@ The superuser has full access to Django’s built-in admin interface, which allo
 
 ```
 
-
 # PgAdmin Access and Usage
-
 
 ## Accessing PgAdmin
 
@@ -92,7 +97,6 @@ Once the PgAdmin container is running, you can access it through your web browse
 
 1. Open your web browser.
 2. Navigate to `http://localhost:8054`.
-
 
 ## Logging In
 
@@ -161,11 +165,12 @@ ReDoc offers a different style of interactive API documentation. It is another w
 1. Open your web browser.
 2. Navigate to `http://localhost:8090/api/schema/redoc/`.
 
-
 ## Generating Fake Data with Faker Library
+
 This project uses the Faker library to generate fake data for various applications. Faker is a Python package that generates fake data for you. Whether you need to populate a database, create realistic test data, or anonymize data, Faker can help.
 
 ### Running the Command
+
 To run the command and generate fake data for all apps, use the following command in your terminal:
 
 ```
@@ -174,18 +179,22 @@ To run the command and generate fake data for all apps, use the following comman
 ```
 
 ## Running Tests with Pytest
+
 To run tests for your Django project using pytest
 
 #### Run Tests:
+
 Use the following command to run tests for a specific app:
 
 ```
     python manage.py test apps.apps_name
 
 ```
+
 ## Caching
 
 ### Redis
+
 Redis for caching in your Django project, you can still use Redis as the message broker for Celery. This is a common and efficient setup because Redis is capable of handling both caching and task queuing simultaneously. Improves application performance by caching frequently accessed data and managing task queues. This reduces database load and speeds up response times.
 
     smartskill/
@@ -202,6 +211,7 @@ Redis for caching in your Django project, you can still use Redis as the message
     │       __init__.py
 
 ### Celery
+
 Celery is a powerful, distributed task queue that can handle asynchronous and scheduled tasks in Django applications. Celery in your Django project for the Smart-Skill application is a great way to handle background tasks like sending notifications, updating analytics, or processing reports. Handles background and scheduled tasks, allowing your application to perform complex or time-consuming operations asynchronously. This ensures that your application remains responsive and efficient.
 
     smartskill/
@@ -212,4 +222,3 @@ Celery is a powerful, distributed task queue that can handle asynchronous and sc
     │   └── ...
     ├── manage.py
     └── Dockerfile
-

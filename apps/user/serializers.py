@@ -1,22 +1,23 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 from apps.user.models import PasswordResetToken, User
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ['groups', 'user_permissions']
+        exclude = ["groups", "user_permissions"]
         extra_kwargs = {
-            'password': {'write_only': True},
+            "password": {"write_only": True},
         }
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        data['user_id'] = self.user.id
+        data["user_id"] = self.user.id
         return data
-
 
 
 class PasswordResetRequestSerializer(serializers.Serializer):
@@ -26,7 +27,9 @@ class PasswordResetRequestSerializer(serializers.Serializer):
         # Normalize the email by lowercasing it, assuming case-insensitive emails
         email = value.lower().strip()
         if not User.objects.filter(email=email).exists():
-            raise serializers.ValidationError("No account is associated with this email address.")
+            raise serializers.ValidationError(
+                "No account is associated with this email address."
+            )
         return email
 
 
@@ -40,15 +43,15 @@ class PasswordResetSerializer(serializers.Serializer):
         return value
 
     def validate(self, attrs):
-        token = attrs.get('token')
+        token = attrs.get("token")
         reset_token = PasswordResetToken.objects.get(token=token)
         if not reset_token.is_valid():
             raise serializers.ValidationError("This password reset link has expired.")
         return attrs
 
     def save(self, **kwargs):
-        token = self.validated_data.get('token')
-        new_password = self.validated_data.get('new_password')
+        token = self.validated_data.get("token")
+        new_password = self.validated_data.get("new_password")
         reset_token = PasswordResetToken.objects.get(token=token)
         user = reset_token.user
         user.set_password(new_password)

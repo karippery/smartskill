@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
@@ -14,9 +14,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-        - ./postgre/data:/var/lib/postgresql/data
+      - ./postgre/data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"  # Host port mapped to container port
+      - "5433:5432" # Host port mapped to container port
     restart: always
     networks:
       - app_network
@@ -28,7 +28,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "8054:80"  # Host port 8054 mapped to container port 80
+      - "8054:80" # Host port 8054 mapped to container port 80
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     restart: always
@@ -53,8 +53,8 @@ services:
     container_name: smartskill
     build: .
     command: sh -c "python manage.py makemigrations &&
-           python manage.py migrate &&
-           python manage.py runserver 0.0.0.0:8090"
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8090"
 
     volumes:
       - .:/app
