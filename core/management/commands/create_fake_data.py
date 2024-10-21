@@ -15,6 +15,12 @@ class Command(BaseCommand):
         self.stdout.write("Creating fake data for qualifications...")
         call_command("create_fake_data_qualifications")
 
+        self.stdout.write("Creating fake data for experiences...")
+        call_command("create_fake_data_experiences")
+
+        self.stdout.write("Creating fake data for projects...")
+        call_command("create_fake_data_projects")
+
         self.stdout.write(
             self.style.SUCCESS("Successfully created fake data for all apps")
         )

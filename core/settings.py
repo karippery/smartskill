@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "apps.user",
     "apps.skills",
     "apps.experiences",
+    "apps.projects",
     "apps.qualifications",
     "django.contrib.admin",
     "django.contrib.auth",

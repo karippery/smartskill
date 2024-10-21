@@ -206,6 +206,32 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "random_users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"11223344\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"first_name\": \"{{$randomFirstName}}\",\r\n  \"last_name\": \"{{$randomLastName}}\",\r\n  \"sex\": \"male\",\r\n  \"title\": \"{{$randomNamePrefix}}\",\r\n  \"location\": \"{{$randomCity}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}users/",
+							"host": [
+								"{{LOCAL_URL}}users"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -325,7 +351,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"user_id\": 2,\r\n  \"skill_id\": 1,\r\n  \"level\": 3\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -347,12 +373,47 @@
 				},
 				{
 					"name": "skill_category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const skill_categories = [\r",
+									"  \"Programming Languages\",\r",
+									"  \"Database Management\",\r",
+									"  \"Data Structures and Algorithms\",\r",
+									"  \"Source Control\",\r",
+									"  \"Testing and Debugging\",\r",
+									"  \"Software Development Methodologies\",\r",
+									"  \"Cloud Computing\",\r",
+									"  \"DevOps\",\r",
+									"  \"Front-End Development\",\r",
+									"  \"Back-End Development\",\r",
+									"  \"Cybersecurity\",\r",
+									"  \"Soft Skills\"\r",
+									"];\r",
+									"\r",
+									"function getRandomcategories() {\r",
+									"    const randomIndex = Math.floor(Math.random() * skill_categories.length);\r",
+									"    return skill_categories[randomIndex];\r",
+									"}\r",
+									"\r",
+									"const randomCategories = getRandomcategories();\r",
+									"\r",
+									"// Set the random language as an environment variable\r",
+									"pm.collectionVariables.set(\"randomCategories\", randomCategories);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Programming languages\"\r\n}",
+							"raw": "{\r\n  \"name\": \"{{randomCategories}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -505,6 +566,493 @@
 			]
 		},
 		{
+			"name": "fields-of-study",
+			"item": [
+				{
+					"name": "fields-of-study",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "fields-of-study",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomJobArea}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}qualifications/fields-of-study/",
+							"host": [
+								"{{LOCAL_URL}}qualifications"
+							],
+							"path": [
+								"fields-of-study",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "degree",
+			"item": [
+				{
+					"name": "degree",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}qualifications/degrees/",
+							"host": [
+								"{{LOCAL_URL}}qualifications"
+							],
+							"path": [
+								"degrees",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "degree",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const degree = [\r",
+									"  \"Associate of Arts (AA)\",\r",
+									"  \"Associate of Science (AS)\",\r",
+									"  \"Associate of Applied Science (AAS)\",\r",
+									"  \"Bachelor of Arts (BA)\",\r",
+									"  \"Bachelor of Science (BS)\",\r",
+									"  \"Bachelor of Fine Arts (BFA)\",\r",
+									"  \"Bachelor of Business Administration (BBA)\",\r",
+									"  \"Master of Arts (MA)\",\r",
+									"  \"Master of Science (MS)\",\r",
+									"  \"Master of Business Administration (MBA)\",\r",
+									"  \"Master of Fine Arts (MFA)\",\r",
+									"  \"Doctor of Philosophy (PhD)\",\r",
+									"  \"Doctor of Education (EdD)\",\r",
+									"  \"Doctor of Business Administration (DBA)\",\r",
+									"  \"Juris Doctor (JD)\",\r",
+									"  \"Doctor of Medicine (MD)\",\r",
+									"  \"Doctor of Dental Surgery (DDS)\"\r",
+									"];\r",
+									"\r",
+									"function getRandomDegree() {\r",
+									"    const randomIndex = Math.floor(Math.random() * degree.length);\r",
+									"    return degree[randomIndex];\r",
+									"}\r",
+									"\r",
+									"const randomDegree = getRandomDegree();\r",
+									"\r",
+									"// Set the random language as an environment variable\r",
+									"pm.collectionVariables.set(\"randomDegree\", randomDegree);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{randomDegree}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}qualifications/degrees/",
+							"host": [
+								"{{LOCAL_URL}}qualifications"
+							],
+							"path": [
+								"degrees",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "qualifications",
+			"item": [
+				{
+					"name": "qualifications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}qualifications/",
+							"host": [
+								"{{LOCAL_URL}}qualifications"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "qualifications",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"institution\": \"{{$randomCompanyName}}\",\r\n  \"start_date\": \"2024-10-21\",\r\n  \"end_date\": \"2024-10-21\",\r\n  \"grade\": \"string\",\r\n  \"description\": \"{{$randomCatchPhraseDescriptor}}\",\r\n  \"user_id\": 1,\r\n  \"degree\": 1,\r\n  \"field_of_study\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}qualifications/",
+							"host": [
+								"{{LOCAL_URL}}qualifications"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "language",
+			"item": [
+				{
+					"name": "language",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/languages/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								"languages",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "language",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const programmingSpeakingLanguages = [\r",
+									"  \"English\",\r",
+									"  \"Mandarin Chinese\",\r",
+									"  \"Hindi\",\r",
+									"  \"Spanish\",\r",
+									"  \"French\",\r",
+									"  \"Arabic\",\r",
+									"  \"Bengali\",\r",
+									"  \"Portuguese\",\r",
+									"  \"Russian\",\r",
+									"  \"Urdu\",\r",
+									"  \"Indonesian\",\r",
+									"  \"German\",\r",
+									"  \"Japanese\",\r",
+									"  \"Korean\",\r",
+									"  \"Vietnamese\",\r",
+									"  \"Turkish\",\r",
+									"  \"Tamil\",\r",
+									"  \"Italian\",\r",
+									"  \"Persian\",\r",
+									"  \"Thai\"\r",
+									"];\r",
+									"\r",
+									"function getRandomSpeakingLanguages() {\r",
+									"    const randomIndex = Math.floor(Math.random() * programmingSpeakingLanguages.length);\r",
+									"    return programmingSpeakingLanguages[randomIndex];\r",
+									"}\r",
+									"\r",
+									"const randomSpeakingLanguages = getRandomSpeakingLanguages();\r",
+									"\r",
+									"// Set the random language as an environment variable\r",
+									"pm.collectionVariables.set(\"randomSpeakingLanguages\", randomSpeakingLanguages);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{randomSpeakingLanguages}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/languages/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								"languages",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "language Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/languages/1",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								"languages",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "project-languages",
+			"item": [
+				{
+					"name": "project-languages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/project-languages/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								"project-languages",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "project-languages",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"project\": 0,\r\n  \"language\": 1,\r\n  \"skill_level\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/project-languages/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								"project-languages",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "project",
+			"item": [
+				{
+					"name": "projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "projects",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"project_name\": \"{{$randomProduct}}-{{$randomProductMaterial}}\",\r\n  \"description\": \"{{$randomProduct}}-{{$randomProductMaterial}} {{$randomJobDescriptor}}\",\r\n  \"start_date\": \"2024-10-21\",\r\n  \"end_date\": \"2025-10-21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "project-roles",
+			"item": [
+				{
+					"name": "project-roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/project-roles/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								"project-roles",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "project-roles",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"project\": 1,\r\n  \"role_name\": \"{{$randomJobTitle}}\",\r\n  \"description\": \"{{$randomJobDescriptor}}\",\r\n  \"experience_range\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/project-roles/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								"project-roles",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "project-skill",
+			"item": [
+				{
+					"name": "project-skills",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/project-skills/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								"project-skills",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "project-skills",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"project_role\": 3,\r\n  \"skill\": 3,\r\n  \"skill_level\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}projects/project-skills/",
+							"host": [
+								"{{LOCAL_URL}}projects"
+							],
+							"path": [
+								"project-skills",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "jwt create",
 			"event": [
 				{
@@ -582,6 +1130,34 @@
 				"description": "### Create Token\n\nThis endpoint is used to create a new token for authentication.\n\n#### Request Body\n\n- `email` (string, required): The email of the user.\n    \n- `password` (string, required): The password of the user.\n    \n\n#### Response\n\nUpon successful execution, the server responds with a status code of 200 and a JSON object containing:\n\n- `refresh` (string): The refresh token for authentication.\n    \n- `access` (string): The access token for authentication."
 			},
 			"response": []
+		},
+		{
+			"name": "refresh_token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyOTU4NTMzOCwiaWF0IjoxNzI5NDk4OTM4LCJqdGkiOiI3MWE1ZmMwMTA2MjI0ZDAzODM0MTkwMWU5NmJjMDJiYiIsInVzZXJfaWQiOjQxfQ.4wPpLbzKjcvA78GgPIl_XJZBPd-dFH2l52PcuLfHbpQ\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL_URL}}users/token/refresh/",
+					"host": [
+						"{{LOCAL_URL}}users"
+					],
+					"path": [
+						"token",
+						"refresh",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -636,6 +1212,18 @@
 			"key": "LOCAL_URL",
 			"value": "",
 			"type": "string"
+		},
+		{
+			"key": "randomCategories",
+			"value": ""
+		},
+		{
+			"key": "randomDegree",
+			"value": ""
+		},
+		{
+			"key": "randomSpeakingLanguages",
+			"value": ""
 		}
 	]
 }
