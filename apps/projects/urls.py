@@ -14,8 +14,8 @@ from apps.projects.views import (
 )
 
 urlpatterns = [
-    path("projects/", ProjectViewSet.as_view(), name="project-list-create"),
-    path("projects/<int:pk>/", ProjectDetailView.as_view(), name="project-detail"),
+    path("", ProjectViewSet.as_view(), name="project-list-create"),
+    path("/<int:pk>/", ProjectDetailView.as_view(), name="project-detail"),
     path(
         "languages/", LanguageListCreateAPIView.as_view(), name="language-list-create"
     ),
