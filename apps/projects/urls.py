@@ -11,6 +11,7 @@ from apps.projects.views import (
     ProjectSkillListCreateAPIView,
     ProjectSkillRetrieveUpdateDestroyAPIView,
     ProjectViewSet,
+    RecommendProjectsView,
 )
 
 urlpatterns = [
@@ -53,5 +54,10 @@ urlpatterns = [
         "project-skills/<int:pk>/",
         ProjectSkillRetrieveUpdateDestroyAPIView.as_view(),
         name="project-skill-detail",
+    ),
+    path(
+        "project-recommended/<int:pk>/",
+        RecommendProjectsView.as_view(),
+        name="project-recommended",
     ),
 ]
