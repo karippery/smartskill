@@ -30,3 +30,6 @@ faker
 #Asynchronous and scheduled tasks
 celery
 django-celery-beat
+
+#Django CORS headers
+django-cors-headers
